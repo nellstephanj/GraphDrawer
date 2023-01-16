@@ -10,17 +10,8 @@ import {multi} from "../data";
 export class LineChartComponent {
   multi: any[] = [];
   view: [number, number] = [700, 300];
-
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Year';
   yAxisLabel: string = 'Population';
-  timeline: boolean = true;
 
   colorScheme: Color = {
     name: "Line-Drawer",
