@@ -11,9 +11,10 @@ export class SignalRService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/graphInformationHub')
+      .withUrl('https://localhost:5001/graph')
       .configureLogging(signalR.LogLevel.Trace)
       .build();
+    this.startConnection();
   }
 
   startConnection = () => {
