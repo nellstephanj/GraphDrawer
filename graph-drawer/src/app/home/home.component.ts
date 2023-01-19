@@ -15,6 +15,8 @@ export class HomeComponent {
     public signalRService: SignalRService,
   ) {
     Object.assign(this, {multi});
+    this.signalRService.startConnection();
+    this.signalRService.addGraphValueListener();
   }
 
   startReceiving() {

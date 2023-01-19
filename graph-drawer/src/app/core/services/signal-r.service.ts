@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import {GraphValueContent} from "../domain/GraphValueContent";
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,9 @@ export class SignalRService {
 
   private readonly hubConnection: signalR.HubConnection;
 
-
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/graph')
+      .withUrl('/graph')
       .configureLogging(signalR.LogLevel.Trace)
       .build();
     this.startConnection();
@@ -29,5 +29,11 @@ export class SignalRService {
         console.log('Connection closed with Graph Information Hub');
       });
     }
+  };
+
+  addGraphValueListener = () => {
+    this.hubConnection.on('sendValue', (content: GraphValueContent) => {
+      console.log(content);
+    })
   };
 }

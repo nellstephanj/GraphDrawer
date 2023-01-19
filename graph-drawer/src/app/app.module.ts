@@ -6,7 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {LineChartModule} from "@swimlane/ngx-charts";
-import { LineChartComponent } from './line-chart/line-chart.component';
+import {LineChartComponent} from './line-chart/line-chart.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
