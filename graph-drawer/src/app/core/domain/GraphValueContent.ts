@@ -1,4 +1,5 @@
 export class GraphValueContent{
   graphName: string = "defaultGraph";
-  value: number = 0.0;
+  xAxis: number = 0.0;
+  yAxis: number = 0.0;
 }

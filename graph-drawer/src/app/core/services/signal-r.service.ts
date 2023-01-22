@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import {GraphValueContent} from "../domain/GraphValueContent";
 
@@ -8,10 +8,11 @@ import {GraphValueContent} from "../domain/GraphValueContent";
 export class SignalRService {
 
   private readonly hubConnection: signalR.HubConnection;
+  onMessageReceived = new EventEmitter<any>(); // TODO: readup
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('/graph')
+      .withUrl('https://localhost:7201/graph')
       .configureLogging(signalR.LogLevel.Trace)
       .build();
     this.startConnection();
@@ -34,6 +35,7 @@ export class SignalRService {
   addGraphValueListener = () => {
     this.hubConnection.on('sendValue', (content: GraphValueContent) => {
       console.log(content);
+      this.onMessageReceived.emit(content);
     })
   };
 }
