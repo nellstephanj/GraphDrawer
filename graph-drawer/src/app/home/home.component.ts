@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {multi} from '../data';
 import {SignalRService} from "../core/services/signal-r.service";
 
 @Component({
@@ -14,7 +13,6 @@ export class HomeComponent {
   constructor(
     public signalRService: SignalRService,
   ) {
-    Object.assign(this, {multi});
     this.signalRService.startConnection();
     this.signalRService.addGraphValueListener();
   }

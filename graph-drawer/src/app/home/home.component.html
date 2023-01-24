@@ -1,5 +1,8 @@
-<div class="graph-base">
+<div class="container">
   <h1>Graph Drawer</h1>
-    <app-line-chart></app-line-chart>
-  <button *ngIf="!this.startedStreaming" class="btn btn-primary" (click)="startReceiving()">Start Receiving</button>
+  <div class="graph-base">
+    <app-line-chart class="graph-chart"></app-line-chart>
+  </div>
 </div>
+
+
