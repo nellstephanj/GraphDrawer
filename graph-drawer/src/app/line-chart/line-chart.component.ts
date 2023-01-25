@@ -10,7 +10,7 @@ import {GraphValueContent} from "../core/domain/GraphValueContent";
 })
 export class LineChartComponent implements OnInit {
   multi: any = []
-  view: [number, number] = [700, 300];
+  view: [number, number] = [1000, 500];
   xAxisLabel: string = 'Item';
   yAxisLabel: string = 'Value';
 
@@ -23,10 +23,7 @@ export class LineChartComponent implements OnInit {
 
   constructor(private signalRService: SignalRService) {
     Object.assign(this, this.multi);
-    this.multi = [{
-      "name": "Graph Drawer",
-      "series": []
-    }];
+    this.multi = [];
   }
 
   onSelect(data: any[]): void {
@@ -44,16 +41,23 @@ export class LineChartComponent implements OnInit {
   ngOnInit(): void {
     this.signalRService.onMessageReceived.subscribe((message: GraphValueContent) => {
       console.log(message);
-      this.multi[0].name = message.graphName;
-      Object.assign(this, this.multi)
+      let index = this.multi.findIndex((multiElement:any) => multiElement.name === message.graphName);
+      if(index === -1){
+        index = this.multi.length;
+        this.multi[index] = {
+          "name": message.graphName,
+          "series": []
+        }
+      }
       // TODO: Transform data for graph
-      this.addData(message)
+      this.addData(message, index);
+      Object.assign(this, this.multi)
     });
   }
 
-  addData(message: GraphValueContent) {
-    if(this.multi[0].series.length > 1000){
-      this.multi[0].series.shift();
+  addData(message: GraphValueContent, index: number) {
+    if(this.multi[index].series.length > 1000){
+      this.multi[index].series.shift();
     }
 
     const data =
@@ -61,7 +65,7 @@ export class LineChartComponent implements OnInit {
         "name": message.yAxis,
         "value": message.xAxis
       }
-    this.multi[0].series.push(data);
+    this.multi[index].series.push(data);
     this.multi = [...this.multi];
   }
 
