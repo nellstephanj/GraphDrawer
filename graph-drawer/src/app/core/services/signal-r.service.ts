@@ -20,7 +20,7 @@ export class SignalRService {
 
   startConnection = () => {
     this.hubConnection.start()
-      .then(() => console.log('Connection with Graph Information Hub started'))
+      .then(() => console.log(`Connection with Graph Information Hub started Hub Id ${this.hubConnection.connectionId}`))
       .catch(err => console.log(`Error while starting connection with Graph Information Hub: ${err}`));
   };
 
