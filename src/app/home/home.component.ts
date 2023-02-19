@@ -8,18 +8,11 @@ import {SignalRService} from "../core/services/signal-r.service";
 
 })
 export class HomeComponent {
-  startedStreaming = false;
-
   constructor(
     public signalRService: SignalRService,
   ) {
     this.signalRService.startConnection();
     this.signalRService.addGraphValueListener();
-  }
-
-  startReceiving() {
-    this.signalRService.startConnection();
-    this.startedStreaming = true;
   }
 }
 

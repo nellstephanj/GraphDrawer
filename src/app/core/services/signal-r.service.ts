@@ -8,11 +8,12 @@ import {GraphValueContent} from "../domain/GraphValueContent";
 export class SignalRService {
 
   private readonly hubConnection: signalR.HubConnection;
-  onMessageReceived = new EventEmitter<any>(); // TODO: readup
+  onMessageReceived = new EventEmitter<any>();
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7000/graph') // TODO: If a simple solution cannot be found create multiple hubs and allocated to people
+      .withUrl('https://localhost:7000/graph')
+      .withAutomaticReconnect()
       .configureLogging(signalR.LogLevel.Trace)
       .build();
     this.startConnection();
@@ -23,18 +24,8 @@ export class SignalRService {
       .then(() => console.log(`Connection with Graph Information Hub started Hub Id ${this.hubConnection.connectionId}`))
       .catch(err => console.log(`Error while starting connection with Graph Information Hub: ${err}`));
   };
-
-  stopConnection = () => {
-    if (this.hubConnection) {
-      this.hubConnection.stop().then(() => {
-        console.log('Connection closed with Graph Information Hub');
-      });
-    }
-  };
-
   addGraphValueListener = () => {
     this.hubConnection.on('sendValue', (content: GraphValueContent) => {
-      console.log(content);
       this.onMessageReceived.emit(content);
     })
   };
