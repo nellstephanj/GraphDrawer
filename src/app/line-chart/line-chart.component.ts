@@ -13,6 +13,7 @@ export class LineChartComponent implements OnInit {
   view: [number, number] = [1000, 500];
   xAxisLabel: string = 'Item';
   yAxisLabel: string = 'Value';
+  noData = true;
 
   colorScheme: Color = {
     name: "Line-Drawer",
@@ -28,9 +29,9 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.signalRService.onMessageReceived.subscribe((message: GraphValueContent) => {
-      console.log(message);
       let index = this.multi.findIndex((multiElement:any) => multiElement.name === message.graphName);
       if(index === -1){
+        this.noData = false;
         index = this.multi.length;
         this.multi[index] = {
           "name": message.graphName,

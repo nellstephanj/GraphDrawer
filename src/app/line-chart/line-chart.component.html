@@ -1,21 +1,26 @@
 <div class="content" role="main">
 
-  <ngx-charts-line-chart
-    [view]="view"
-    [animations]="true"
-    [scheme]="colorScheme"
-    [legend]="true"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    [showGridLines]="true"
-    [xAxis]="true"
-    [yAxis]="true"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [timeline]="true"
-    [autoScale]="true"
-    [results]="multi"
-  >
-  </ngx-charts-line-chart>
+  <div *ngIf="noData else loading">
+    No data to display please connect with SignalR
+  </div>
+  <ng-template #loading>
+    <ngx-charts-line-chart
+      [view]="view"
+      [animations]="true"
+      [scheme]="colorScheme"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [showGridLines]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="true"
+      [autoScale]="true"
+      [results]="multi"
+    >
+    </ngx-charts-line-chart>
+  </ng-template>
 
 </div>
