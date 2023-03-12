@@ -44,7 +44,7 @@ export class LineChartComponent implements OnInit {
   }
 
   addData(message: GraphValueContent, index: number) {
-    if(this.multi[index].series.length > 100){
+    if(this.multi[index].series.length > 1000){
       this.multi[index].series.shift();
     }
 
