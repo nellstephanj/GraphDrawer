@@ -1,9 +1,9 @@
 <div class="content" role="main">
 
-  <div *ngIf="noData else loading">
+  <div *ngIf="noData else showData">
     No data to display please connect with SignalR
   </div>
-  <ng-template #loading>
+  <ng-template #showData>
     <ngx-charts-line-chart
       [view]="view"
       [animations]="true"
